@@ -6,7 +6,23 @@
         <entry key="..\:/Users/PC/androidprojelerim/appindie/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/PC/androidprojelerim/appindie/app/src/main/res/layout/fragment_home.xml" value="0.35190217391304346" />
         <entry key="..\:/Users/PC/androidprojelerim/appindie/app/src/main/res/xml/network_security_config.xml" value="0.1" />
-        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/fragment_home.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/drawable/ic_add_check.xml" value="0.2175" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/drawable/ic_add_send.xml" value="0.3675" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-large/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-large/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-normal/activity_main.xml" value="0.3211050724637681" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-normal/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-small/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-small/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-xlarge/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout-xlarge/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/add_todo_remember.xml" value="0.5" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/fragment_add_todo_bottom_sheet.xml" value="0.1232876712328767" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/fragment_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/item_todo_check.xml" value="0.5" />
+        <entry key="..\:/Users/PC/androidprojelerim/appindiedevelop/todoremember/app/src/main/res/layout/todo_list_recycler.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -14,7 +14,6 @@
         android:background="@android:color/transparent"
         android:clipChildren="false"
         android:elevation="8dp"
-        android:outlineSpotShadowColor="#448AFF"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
@@ -34,15 +33,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_launcher_background" />
+                tools:src="@drawable/ic_launcher_background"
+                android:contentDescription="@string/weather_icon" />
 
             <TextView
                 android:id="@+id/weather_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="@dimen/tv_temp"
                 app:layout_constraintBottom_toTopOf="@+id/weather_description"
                 app:layout_constraintEnd_toEndOf="@+id/weather_image"
+                android:textStyle=""
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="38°C" />
 
@@ -52,22 +53,88 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:gravity="center"
-                android:textSize="12sp"
+                android:textSize="@dimen/tv_description"
+                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/weather_image"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Parçalı bulutlu" />
 
+            <TextView
+                android:id="@+id/quote_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/quote_author"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/weather_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="You might well remember that nothing can bring you success but yourself." />
+
+            <TextView
+                android:id="@+id/quote_author"
+                android:layout_width="0dp"
+                android:gravity="end"
+                tools:text="Napoleon Hill"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/weather_image" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/deneme"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/date_day"
+        android:layout_width="match_parent"
+        tools:text = "17-08-Çarşamba"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
+    <androidx.slidingpanelayout.widget.SlidingPaneLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/sliding_pane_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_day" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/todo_recycler"
+            android:layout_width="550dp"
+            tools:listitem="@layout/item_todo_check"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_gravity="start"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/todo_detail_container"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:name="com.ibrahimethem.todoremember.ui.detail.DetailFragment"/>
+
+    </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_todo_remember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_add_check"
+        android:backgroundTint="#0091EA"
+        app:tint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/todoadd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

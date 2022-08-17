@@ -9,5 +9,19 @@
         android:id="@+id/homeFragment"
         android:name="com.ibrahimethem.todoremember.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addTodoBottomSheetFragment"
+            app:destination="@id/addTodoBottomSheetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.ibrahimethem.todoremember.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+    <dialog
+        android:id="@+id/addTodoBottomSheetFragment"
+        android:name="com.ibrahimethem.todoremember.ui.addtodo.AddTodoBottomSheetFragment"
+        android:label="fragment_add_todo_bottom_sheet"
+        tools:layout="@layout/fragment_add_todo_bottom_sheet" />
 </navigation>
