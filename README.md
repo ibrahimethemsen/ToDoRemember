@@ -25,6 +25,6 @@ Repository Pattern
 
 Clean Architecture
 
-![homescreen](https://user-images.githubusercontent.com/68695185/185768830-ebbd8851-29a4-4c82-b719-8334de86418a.png)
-![addtodo](https://user-images.githubusercontent.com/68695185/185768833-71fd59b2-4715-47de-b7ce-cccdbbdb34f7.png)
-![detailscreen](https://user-images.githubusercontent.com/68695185/185768834-75d73c1d-6933-4485-89dc-b1ab293606da.png)
+![addtodo](https://user-images.githubusercontent.com/68695185/185768935-414c64d2-75c7-42b4-b8ac-86a2ad754159.png)
+![detailscreen](https://user-images.githubusercontent.com/68695185/185768936-c9571949-3b02-4d32-9599-22e7a269b05f.png)
+![homescreen](https://user-images.githubusercontent.com/68695185/185768937-750140e6-f9ea-4353-922e-eb0838c5b74f.png)
