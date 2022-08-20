@@ -97,32 +97,19 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         tools:text="17-08-Çarşamba" />
 
-    <androidx.slidingpanelayout.widget.SlidingPaneLayout
-        android:id="@+id/sliding_pane_layout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/todo_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="start"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_day">
+        app:layout_constraintTop_toBottomOf="@+id/date_day"
+        tools:listitem="@layout/item_todo_check" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/todo_recycler"
-            android:layout_width="550dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_todo_check" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/todo_detail_container"
-            android:name="com.ibrahimethem.todoremember.ui.detail.DetailFragment"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-    </androidx.slidingpanelayout.widget.SlidingPaneLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_todo_remember"

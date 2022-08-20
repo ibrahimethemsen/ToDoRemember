@@ -2,10 +2,13 @@ package com.ibrahimethem.todoremember.ui.home
 
 
 
+import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.ibrahimethem.todoremember.R
 import com.ibrahimethem.todoremember.base.BaseFragment
 import com.ibrahimethem.todoremember.databinding.FragmentHomeBinding
@@ -32,6 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         viewModel.getQuote()
         viewModel.getDate().also {
             setAdapter(it)
+
         }
         observe()
         todoAdd()

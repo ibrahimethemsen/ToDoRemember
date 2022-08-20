@@ -104,6 +104,7 @@ class HomeViewModel @Inject constructor(
         //http://openweathermap.org/img/wn/10d.png
         return "http://openweathermap.org/img/wn/${id}@2x.png"
     }
+
 }
 
 
