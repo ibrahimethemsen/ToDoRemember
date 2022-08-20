@@ -2,8 +2,8 @@ package com.ibrahimethem.todoremember.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ibrahimethem.todoremember.local.TodoRememberDatabase
-import com.ibrahimethem.todoremember.local.todo.TodoDao
+import com.ibrahimethem.todoremember.data.database.TodoRememberDatabase
+import com.ibrahimethem.todoremember.data.database.TodoDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +27,7 @@ object RoomModule {
     @[Provides Singleton]
     fun provideTodoDao(
         db : TodoRememberDatabase
-    ) : TodoDao{
+    ) : TodoDao {
         return db.todoDao()
     }
 }

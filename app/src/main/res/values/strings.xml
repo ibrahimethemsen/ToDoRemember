@@ -4,4 +4,10 @@
     <string name="celcius_value">%s°C</string>
     <string name="todoadd">todoadd</string>
     <string name="weather_icon">Weather Icon</string>
+    <string name="title_activity_wear">WearActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

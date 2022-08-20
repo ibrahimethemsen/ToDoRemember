@@ -2,8 +2,8 @@ package com.ibrahimethem.todoremember.ui.addtodo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ibrahimethem.todoremember.local.todo.TodoDao
-import com.ibrahimethem.todoremember.model.todo.TodoRemember
+import com.ibrahimethem.todoremember.domain.model.todo.TodoRemember
+import com.ibrahimethem.todoremember.domain.usecase.InsertTodoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -11,11 +11,12 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class AddTodoBottomSheetViewModel @Inject constructor(private val todoDao: TodoDao) : ViewModel() {
+class AddTodoBottomSheetViewModel @Inject constructor(private val insertTodoUseCase: InsertTodoUseCase) :
+    ViewModel() {
 
     private fun insertTodoRemember(todoRemember: TodoRemember) {
         viewModelScope.launch {
-            todoDao.insertTodo(todoRemember)
+            insertTodoUseCase.invoke(todoRemember)
         }
     }
 

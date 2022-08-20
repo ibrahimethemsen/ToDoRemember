@@ -1,16 +1,21 @@
 package com.ibrahimethem.todoremember.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ibrahimethem.todoremember.databinding.ItemTodoCheckBinding
-import com.ibrahimethem.todoremember.model.todo.TodoRemember
+import com.ibrahimethem.todoremember.domain.model.todo.TodoRemember
 
-class TodoRecyclerAdapter(private val selectedTodo : ((id : String) -> Unit)?) : ListAdapter<TodoRemember, TodoRecyclerAdapter.TodoViewHolder>(
-    DiffUtilCallBack
-) {
+class TodoRecyclerAdapter(
+    private val selectedTodo: ((id: String) -> Unit)?,
+    private val todoCheckListener : ( todo : TodoRemember) -> Unit
+) :
+    ListAdapter<TodoRemember, TodoRecyclerAdapter.TodoViewHolder>(
+        DiffUtilCallBack
+    ) {
     companion object {
         private val DiffUtilCallBack = object : DiffUtil.ItemCallback<TodoRemember>() {
             override fun areItemsTheSame(oldItem: TodoRemember, newItem: TodoRemember): Boolean {
@@ -26,12 +31,18 @@ class TodoRecyclerAdapter(private val selectedTodo : ((id : String) -> Unit)?) :
 
     class TodoViewHolder(val todoBinding: ItemTodoCheckBinding) :
         RecyclerView.ViewHolder(todoBinding.root) {
-        fun bind(todoRemember: TodoRemember){
+        fun bind(todoRemember: TodoRemember) {
             todoBinding.apply {
                 todoTitle.text = todoRemember.title
                 todoRemember.check?.let {
                     todoCheck.isChecked = it
+                    if (it){
+                        todoBinding.lineCheck.visibility = View.VISIBLE
+                    }else{
+                        todoBinding.lineCheck.visibility = View.INVISIBLE
+                    }
                 }
+
             }
         }
     }
@@ -52,14 +63,14 @@ class TodoRecyclerAdapter(private val selectedTodo : ((id : String) -> Unit)?) :
             selectedTodo?.invoke(current.id.toString())
         }
         holder.todoBinding.todoCheck.setOnClickListener {
-            if (holder.todoBinding.todoCheck.isChecked){
-                val todo = current.copy(check = true)
-            }else{
-                val todo = current.copy(check = false)
+            if (holder.todoBinding.todoCheck.isChecked) {
+                val newTodo = current.copy(check = true)
+                todoCheckListener.invoke(newTodo)
+            } else {
+                val newTodo = current.copy(check = false)
+                todoCheckListener.invoke(newTodo)
             }
         }
-
         holder.bind(todoRemember = current)
     }
-
 }

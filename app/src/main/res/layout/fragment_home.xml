@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -29,21 +28,21 @@
                 android:id="@+id/weather_image"
                 android:layout_width="140dp"
                 android:layout_height="0dp"
+                android:contentDescription="@string/weather_icon"
                 android:paddingBottom="36dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_launcher_background"
-                android:contentDescription="@string/weather_icon" />
+                tools:src="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/weather_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/tv_temp"
+                android:textStyle=""
                 app:layout_constraintBottom_toTopOf="@+id/weather_description"
                 app:layout_constraintEnd_toEndOf="@+id/weather_image"
-                android:textStyle=""
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="38°C" />
 
@@ -76,52 +75,52 @@
             <TextView
                 android:id="@+id/quote_author"
                 android:layout_width="0dp"
-                android:gravity="end"
-                tools:text="Napoleon Hill"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="8dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="end"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/weather_image" />
+                app:layout_constraintStart_toEndOf="@+id/weather_image"
+                tools:text="Napoleon Hill" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/date_day"
         android:layout_width="match_parent"
-        tools:text = "17-08-Çarşamba"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:text="17-08-Çarşamba" />
 
     <androidx.slidingpanelayout.widget.SlidingPaneLayout
+        android:id="@+id/sliding_pane_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/sliding_pane_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_day" >
+        app:layout_constraintTop_toBottomOf="@+id/date_day">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todo_recycler"
             android:layout_width="550dp"
-            tools:listitem="@layout/item_todo_check"
             android:layout_height="match_parent"
+            android:layout_gravity="start"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_gravity="start"/>
+            tools:listitem="@layout/item_todo_check" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/todo_detail_container"
+            android:name="com.ibrahimethem.todoremember.ui.detail.DetailFragment"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:name="com.ibrahimethem.todoremember.ui.detail.DetailFragment"/>
+            android:layout_weight="1" />
 
     </androidx.slidingpanelayout.widget.SlidingPaneLayout>
 
@@ -129,12 +128,12 @@
         android:id="@+id/add_todo_remember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_check"
         android:backgroundTint="#0091EA"
-        app:tint="@color/white"
+        android:contentDescription="@string/todoadd"
+        android:src="@drawable/ic_add_check"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/todoadd" />
+        app:tint="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

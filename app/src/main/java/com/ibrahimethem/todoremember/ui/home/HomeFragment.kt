@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.ibrahimethem.todoremember.R
 import com.ibrahimethem.todoremember.base.BaseFragment
 import com.ibrahimethem.todoremember.databinding.FragmentHomeBinding
+import com.ibrahimethem.todoremember.domain.model.todo.TodoRemember
 import com.ibrahimethem.todoremember.util.Consts.LANGUAGE
 import com.ibrahimethem.todoremember.util.Consts.LAT
 import com.ibrahimethem.todoremember.util.Consts.LON
@@ -23,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 ) {
     override val viewModel: HomeViewModel by viewModels()
     private val todoRecyclerAdapter : TodoRecyclerAdapter by lazy {
-        TodoRecyclerAdapter(::selectedTodo)
+        TodoRecyclerAdapter(::selectedTodo,::checkTodo)
     }
 
     override fun onViewFinished() {
@@ -36,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         todoAdd()
     }
 
-    fun observe() {
+    private fun observe() {
         viewModel.weatherResponse.observe(viewLifecycleOwner) {
             binding.weatherTemp.text = getString(R.string.celcius_value, it.temp.toString())
             binding.weatherDescription.text = it.description
@@ -55,12 +56,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
         }
     }
-    fun todoAdd(){
+    private fun todoAdd(){
         binding.addTodoRemember.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddTodoBottomSheetFragment())
         }
     }
-    fun setAdapter(date : String){
+    private fun setAdapter(date : String){
         binding.todoRecycler.adapter = todoRecyclerAdapter
         lifecycle.coroutineScope.launch{
             viewModel.getAllTodo(date).collect{
@@ -76,5 +77,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         action?.let {
             requireView().findNavController().navigate(it)
         }
+    }
+
+    private fun checkTodo(todoRemember: TodoRemember){
+        viewModel.updateTodoCheck(todoRemember)
     }
 }

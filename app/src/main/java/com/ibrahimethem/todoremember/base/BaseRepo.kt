@@ -1,15 +1,18 @@
 package com.ibrahimethem.todoremember.base
 
 import com.ibrahimethem.todoremember.util.Resource
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-abstract class BaseRepo{
+abstract class BaseRepo(
+    private val dispatcher : CoroutineDispatcher = Dispatchers.IO
+){
     suspend fun <T> safeApiCall(
         apiToBeCalled : suspend () -> Response<T>
     ) : Resource<T>{
-        return withContext(Dispatchers.IO){
+        return withContext(dispatcher){
             try {
                 val respone : Response<T> = apiToBeCalled()
                 val body = respone.body()

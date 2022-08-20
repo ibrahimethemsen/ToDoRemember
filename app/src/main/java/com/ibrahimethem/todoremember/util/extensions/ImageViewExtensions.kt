@@ -12,10 +12,10 @@ fun ImageView.downloadImage(imageUrl : String?){
         crossfade(500)
         placeholder(placeHolder)
         listener(
-            onSuccess = { _,result ->
+            onSuccess = { _,_ ->
 
             },
-            onError = {_,result ->
+            onError = {_,_ ->
 
             }
         )

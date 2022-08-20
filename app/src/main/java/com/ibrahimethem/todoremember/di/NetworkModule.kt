@@ -1,8 +1,8 @@
 package com.ibrahimethem.todoremember.di
 
 
-import com.ibrahimethem.todoremember.network.quote.QuoteService
-import com.ibrahimethem.todoremember.network.weather.WeatherService
+import com.ibrahimethem.todoremember.data.network.quote.QuoteService
+import com.ibrahimethem.todoremember.data.network.weather.WeatherService
 import com.ibrahimethem.todoremember.util.Consts.QUOTE_BASE_URL
 import com.ibrahimethem.todoremember.util.Consts.WEATHER_BASE_URL
 import com.squareup.moshi.Moshi

@@ -1,48 +1,45 @@
 package com.ibrahimethem.todoremember.ui.detail
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import com.ibrahimethem.todoremember.base.BaseFragment
 import com.ibrahimethem.todoremember.databinding.FragmentDetailBinding
-import com.ibrahimethem.todoremember.model.todo.TodoRemember
+import com.ibrahimethem.todoremember.domain.model.todo.TodoRemember
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment<FragmentDetailBinding,DetailViewModel>(
+    FragmentDetailBinding::inflate
+) {
     //TODO -> calismiyor has null arguments
     //private val args: DetailFragmentArgs by navArgs()
 
     //primitive type doğrudan lateinit yapamıyoruz
-    var selectedId = -1
+    private var selectedId = -1
 
-    private var _binding : FragmentDetailBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel : DetailViewModel by viewModels()
+    override val viewModel : DetailViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetailBinding.inflate(layoutInflater,container,false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewFinished() {
         arguments?.let {
             selectedId = DetailFragmentArgs.fromBundle(it).selectedTodo.toInt()
         }
         viewModel.getTodoRemember(selectedId).observe(viewLifecycleOwner){selectedTodoRemember ->
-            selectedTodoRemember?.let {
-                bind(it)
+            selectedTodoRemember?.let { todoCurrent ->
+                bind(todoCurrent)
+                binding.detailSave.setOnClickListener {
+                    updateTodo(todoCurrent)
+                    val action = DetailFragmentDirections.actionDetailFragmentToHomeFragment()
+                    it.findNavController().navigate(action)
+                }
             }
         }
-
+        binding.detailBackBtn.setOnClickListener {
+            val action = DetailFragmentDirections.actionDetailFragmentToHomeFragment()
+            it.findNavController().navigate(action)
+        }
     }
+
+
 
     private fun bind(todo : TodoRemember){
         binding.apply {
@@ -58,16 +55,17 @@ class DetailFragment : Fragment() {
             binding.detailTitleTv.text.toString()
         )
     }
-    private fun addNewTodo(){
-        if (isEntryValid()){
-            viewModel.addNewTodo()
+
+    private fun updateTodo(todo: TodoRemember){
+        if(isEntryValid()){
+            viewModel.addNewTodo(
+                todoRemember = todo,
+                title = binding.detailTitleTv.text.toString(),
+                description = binding.detailDescription.text.toString(),
+                check = binding.detailCheck.isChecked
+            )
         }
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //memory leak
-        _binding = null
-    }
 }

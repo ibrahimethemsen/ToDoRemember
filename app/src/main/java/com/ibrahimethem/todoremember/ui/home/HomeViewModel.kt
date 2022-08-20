@@ -2,12 +2,13 @@ package com.ibrahimethem.todoremember.ui.home
 
 
 import androidx.lifecycle.*
-import com.ibrahimethem.todoremember.local.todo.TodoDao
-import com.ibrahimethem.todoremember.model.quote.Result
-import com.ibrahimethem.todoremember.model.todo.TodoRemember
-import com.ibrahimethem.todoremember.model.weather.uistate.WeatherModel
-import com.ibrahimethem.todoremember.repo.quote.QuoteRepository
-import com.ibrahimethem.todoremember.repo.weather.WeatherRepository
+import com.ibrahimethem.todoremember.domain.model.quote.Result
+import com.ibrahimethem.todoremember.domain.model.todo.TodoRemember
+import com.ibrahimethem.todoremember.domain.model.weather.uistate.WeatherModel
+import com.ibrahimethem.todoremember.domain.usecase.GetAllTodoUseCase
+import com.ibrahimethem.todoremember.domain.usecase.GetRandomQuoteUseCase
+import com.ibrahimethem.todoremember.domain.usecase.LocationWeatherUseCase
+import com.ibrahimethem.todoremember.domain.usecase.UpdateTodoUseCase
 import com.ibrahimethem.todoremember.util.Resource
 import com.ibrahimethem.todoremember.util.extensions.kelvinToCelcius
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,9 +20,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val weatheRepository: WeatherRepository,
-    private val quoteRepository: QuoteRepository,
-    private val todoDao : TodoDao
+    private val getAllUseCase : GetAllTodoUseCase,
+    private val updatetodo : UpdateTodoUseCase,
+    private val locationWeatherUseCase: LocationWeatherUseCase,
+    private val randomQuoteUseCase: GetRandomQuoteUseCase
 ) : ViewModel() {
     private val _weatherResponse = MutableLiveData<WeatherModel>()
     val weatherResponse: LiveData<WeatherModel> = _weatherResponse
@@ -35,7 +37,7 @@ class HomeViewModel @Inject constructor(
     fun getLocationWeather(lat: String, lon: String, apiKey: String, lang: String) {
         viewModelScope.launch {
             val weatheRequest =
-                weatheRepository.getLocation(lat = lat, lon = lon, apiKey = apiKey, lang = lang)
+                locationWeatherUseCase.invoke(lat = lat, lon = lon, apiKey = apiKey, lang = lang)
             when (weatheRequest) {
                 is Resource.Success -> {
                     val temp = weatheRequest.data.main?.temp?.kelvinToCelcius()
@@ -60,7 +62,7 @@ class HomeViewModel @Inject constructor(
     }
     fun getQuote(){
         viewModelScope.launch {
-            when(val request = quoteRepository.getRandomQuote()){
+            when(val request = randomQuoteUseCase.invoke()){
                 is Resource.Success -> {
                     _quoteResponse.postValue(request.data)
                 }
@@ -81,6 +83,11 @@ class HomeViewModel @Inject constructor(
         return day
     }
 
+    fun updateTodoCheck(todoRemember: TodoRemember){
+        viewModelScope.launch {
+            updatetodo.invoke(todoRemember)
+        }
+    }
     private fun generateWeatherModel(
         temp: Int,
         description: String,
@@ -90,7 +97,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getAllTodo(date : String) : Flow<List<TodoRemember>> {
-        return todoDao.getTodoDate(date)
+        return getAllUseCase.invoke(date)
     }
 
     private fun iconWeather(id: String): String {
