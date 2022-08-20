@@ -25,9 +25,7 @@ Repository Pattern
 
 Clean Architecture
 
-Leak Canary(Constraint layout da bir memory leak oluşabiliyor)
-
-Canvas(İstediğim görünüm düzgün olmadı)
+Leak Canary(memory leak)
 
 ViewBinding
 
