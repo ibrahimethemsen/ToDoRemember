@@ -5,8 +5,10 @@ buildscript {
         nav_version = "2.5.1"
         coroutine_version = "1.6.1"
         hilt_version = "2.42"
+        lifecycle_version = "2.5.1"
     }
     dependencies {
+
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }

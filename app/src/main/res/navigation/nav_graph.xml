@@ -13,15 +13,30 @@
         <action
             android:id="@+id/action_homeFragment_to_addTodoBottomSheetFragment"
             app:destination="@id/addTodoBottomSheetFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.ibrahimethem.todoremember.ui.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="selected_todo"
+            app:argType="string"
+             />
+    </fragment>
     <dialog
         android:id="@+id/addTodoBottomSheetFragment"
         android:name="com.ibrahimethem.todoremember.ui.addtodo.AddTodoBottomSheetFragment"
         android:label="fragment_add_todo_bottom_sheet"
-        tools:layout="@layout/fragment_add_todo_bottom_sheet" />
+        tools:layout="@layout/fragment_add_todo_bottom_sheet" >
+        <action
+            android:id="@+id/action_addTodoBottomSheetFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
 </navigation>

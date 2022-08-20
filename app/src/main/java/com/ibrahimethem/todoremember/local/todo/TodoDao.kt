@@ -22,4 +22,6 @@ interface TodoDao {
     //date all todoremember
     @Query("SELECT * FROM todolist WHERE date = :date")
     fun getTodoDate(date : String) : Flow<List<TodoRemember>>
+
+
 }

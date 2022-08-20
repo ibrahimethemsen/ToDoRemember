@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.viewModels
+
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ibrahimethem.todoremember.databinding.FragmentAddTodoBottomSheetBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +35,18 @@ class AddTodoBottomSheetFragment @Inject constructor(): BottomSheetDialogFragmen
         super.onViewCreated(view, savedInstanceState)
         //direct focus
         binding.etAddTodo.requestFocus()
-        viewModel
+        binding.imageButton.setOnClickListener {
+            addTodo()
+            findNavController().navigate(AddTodoBottomSheetFragmentDirections.actionAddTodoBottomSheetFragmentToHomeFragment())
+        }
+    }
+
+    private fun addTodo(){
+        binding.apply {
+            val title = etAddTodo.text.toString()
+            val date = viewModel.getDate()
+            viewModel.addTodoRemember(date = date, title = title)
+        }
     }
 
 }

@@ -1,10 +1,7 @@
 package com.ibrahimethem.todoremember.ui.home
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.ibrahimethem.todoremember.local.todo.TodoDao
 import com.ibrahimethem.todoremember.model.quote.Result
 import com.ibrahimethem.todoremember.model.todo.TodoRemember
@@ -14,6 +11,7 @@ import com.ibrahimethem.todoremember.repo.weather.WeatherRepository
 import com.ibrahimethem.todoremember.util.Resource
 import com.ibrahimethem.todoremember.util.extensions.kelvinToCelcius
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -75,19 +73,24 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-    fun getDate(){
-        val formatter = SimpleDateFormat("dd-MM-EEEE", Locale("tr"))
+    fun getDate() : String{
+        val formatter = SimpleDateFormat("dd-MM-EEE", Locale("tr"))
         val calendar = Calendar.getInstance()
         val day = formatter.format(calendar.time.time)
         _homeDate.value = day
-
+        return day
     }
+
     private fun generateWeatherModel(
         temp: Int,
         description: String,
         weather: String
     ): WeatherModel {
         return WeatherModel(temp, description, weather)
+    }
+
+    fun getAllTodo(date : String) : Flow<List<TodoRemember>> {
+        return todoDao.getTodoDate(date)
     }
 
     private fun iconWeather(id: String): String {

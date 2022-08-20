@@ -21,10 +21,10 @@ class AddTodoBottomSheetViewModel @Inject constructor(private val todoDao: TodoD
 
     private fun getTodoRemember(
         date: String,
-        check: Boolean,
         title: String,
-        description: String,
-        value: String,
+        check: Boolean? = false,
+        description: String? = "",
+        value: String? = "",
     ): TodoRemember {
         return TodoRemember(
             date = date,
@@ -37,18 +37,24 @@ class AddTodoBottomSheetViewModel @Inject constructor(private val todoDao: TodoD
 
     fun addTodoRemember(
         date: String,
-        check: Boolean,
         title: String,
-        description: String,
-        value: String
+        check: Boolean? = false,
+        description: String? = "",
+        value: String? = ""
     ) {
-        val todoRemember = getTodoRemember(date, check, title, description, value)
+        val todoRemember = getTodoRemember(
+            date = date,
+            check = check,
+            title = title,
+            description = description,
+            value = value
+        )
         insertTodoRemember(todoRemember)
     }
 
-    fun getDate(){
+    fun getDate(): String {
         val formatter = SimpleDateFormat("dd-MM-EEE", Locale("tr"))
         val calendar = Calendar.getInstance()
-        val day = formatter.format(calendar.time.time)
+        return formatter.format(calendar.time.time)
     }
 }

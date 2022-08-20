@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/todo_description"
+        android:id="@+id/todo_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="1"
