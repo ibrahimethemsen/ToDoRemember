@@ -1,25 +1,30 @@
 package com.ibrahimethem.todoremember.ui.detail
 
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.ibrahimethem.todoremember.base.BaseFragment
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.ibrahimethem.todoremember.R
+
 import com.ibrahimethem.todoremember.databinding.FragmentDetailBinding
 import com.ibrahimethem.todoremember.domain.model.todo.TodoRemember
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment : BaseFragment<FragmentDetailBinding,DetailViewModel>(
-    FragmentDetailBinding::inflate
-) {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
     //TODO -> calismiyor has null arguments
     //private val args: DetailFragmentArgs by navArgs()
 
     //primitive type doğrudan lateinit yapamıyoruz
     private var selectedId = -1
 
-    override val viewModel : DetailViewModel by viewModels()
+    private val binding : FragmentDetailBinding by viewBinding()
+    private val viewModel : DetailViewModel by viewModels()
 
-    override fun onViewFinished() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             selectedId = DetailFragmentArgs.fromBundle(it).selectedTodo.toInt()
         }
@@ -38,7 +43,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding,DetailViewModel>(
             it.findNavController().navigate(action)
         }
     }
-
 
 
     private fun bind(todo : TodoRemember){

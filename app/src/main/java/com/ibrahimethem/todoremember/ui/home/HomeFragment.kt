@@ -2,15 +2,17 @@ package com.ibrahimethem.todoremember.ui.home
 
 
 
+
+import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.slidingpanelayout.widget.SlidingPaneLayout
+import by.kirich1409.viewbindingdelegate.viewBinding
+
 import com.ibrahimethem.todoremember.R
-import com.ibrahimethem.todoremember.base.BaseFragment
 import com.ibrahimethem.todoremember.databinding.FragmentHomeBinding
 import com.ibrahimethem.todoremember.domain.model.todo.TodoRemember
 import com.ibrahimethem.todoremember.util.Consts.LANGUAGE
@@ -22,20 +24,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
-    FragmentHomeBinding::inflate
-) {
-    override val viewModel: HomeViewModel by viewModels()
-    private val todoRecyclerAdapter : TodoRecyclerAdapter by lazy {
-        TodoRecyclerAdapter(::selectedTodo,::checkTodo)
-    }
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    override fun onViewFinished() {
+    private val binding : FragmentHomeBinding by viewBinding()
+
+    private val viewModel: HomeViewModel by viewModels()
+
+    private var todoRecyclerAdapter : TodoRecyclerAdapter? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.getLocationWeather(LAT, LON, WEATHER_API_KEY, LANGUAGE)
         viewModel.getQuote()
         viewModel.getDate().also {
             setAdapter(it)
-
         }
         observe()
         todoAdd()
@@ -66,12 +68,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         }
     }
     private fun setAdapter(date : String){
+        todoRecyclerAdapter = TodoRecyclerAdapter(
+            ::selectedTodo,::checkTodo
+        )
         binding.todoRecycler.adapter = todoRecyclerAdapter
         lifecycle.coroutineScope.launch{
             viewModel.getAllTodo(date).collect{
-                todoRecyclerAdapter.submitList(it)
+                todoRecyclerAdapter?.let { recyclerAdapter ->
+                    recyclerAdapter.submitList(it)
+                }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        todoRecyclerAdapter = null
+        super.onDestroyView()
     }
 
     private fun selectedTodo(id: String?){
