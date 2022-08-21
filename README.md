@@ -29,7 +29,8 @@ Leak Canary(memory leak)
 
 ViewBinding
 
-ViewBindingPropertyDelegate (ViewBinding Memory Leak önlemek için)
+ViewBindingPropertyDelegate (ViewBinding Memory Leak önlemek için) -> 
+https://github.com/androidbroadcast/ViewBindingPropertyDelegate
 
 ![addtodo](https://user-images.githubusercontent.com/68695185/185768935-414c64d2-75c7-42b4-b8ac-86a2ad754159.png)
 ![detailscreen](https://user-images.githubusercontent.com/68695185/185768936-c9571949-3b02-4d32-9599-22e7a269b05f.png)
