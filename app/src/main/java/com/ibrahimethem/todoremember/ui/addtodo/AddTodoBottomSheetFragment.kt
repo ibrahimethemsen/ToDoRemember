@@ -37,7 +37,7 @@ class AddTodoBottomSheetFragment @Inject constructor(): BottomSheetDialogFragmen
         binding.etAddTodo.requestFocus()
         binding.imageButton.setOnClickListener {
             addTodo()
-            findNavController().navigate(AddTodoBottomSheetFragmentDirections.actionAddTodoBottomSheetFragmentToHomeFragment())
+            dismiss()
         }
     }
 
